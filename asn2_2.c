@@ -1,12 +1,14 @@
 /*
 AUTHOR : SACHIN V B, SACHIN R
-DESCRIPTION: PROGRAM FOR SIGN UP BY TAKING USER_NAME AND PASSWORD
+DESCRIPTION: PROGRAM FOR SIGN UP BY TAKING USER_NAME, PASSWORD AND NAME.
 */
 
 #include<unistd.h>
 #include<stdio.h>
 #include<string.h>
 #include<time.h>
+
+
 
 
 char* date()
@@ -52,8 +54,13 @@ main(int argc,char **argv)
 		return;
 	}
 	
-	
-	char user_name[100], password[100]; 
+	if(fp1==NULL)
+	{
+		printf("Log file is not included. \n ");
+		return;
+	}
+
+	char user_name[100], password[100], name[100];
 	int flag=0, flag1=0;
 
 	while(flag==0)
@@ -68,6 +75,7 @@ main(int argc,char **argv)
 			scanf("%s", user_name);
 		}
 
+		
 		while(1)
 		{
 			char str[100];
@@ -84,6 +92,7 @@ main(int argc,char **argv)
 			{
 				user[i]=str[i];
 				i++;
+				
 			} 
 		
 			user[i]='\0';
@@ -111,6 +120,7 @@ main(int argc,char **argv)
 		fseek(fp, 0, SEEK_SET);
 	}
 
+
 	fclose(fp);
 
 	fprintf(fp1, "%s Entered user_name :%s\n",date(), user_name );	
@@ -132,13 +142,27 @@ main(int argc,char **argv)
 		}
 		
 		fprintf(fp1, "%s Entered password :%s\n",date(),password);	
-		fprintf(fp, "%s,%s\n", user_name,password);
+		
 			
 	}
+
+	printf("Enter your Name :");
+	scanf("%s", name);
+
+	if(strlen(name)<1)
+	{
+		printf("Enter your Name :");
+		scanf("%s", name);
+	}
+	
+	
+	fprintf(fp1, "%s Entered Name :%s\n",date(),name);
+	fprintf(fp, "%s,%s,%s\n", user_name,password,name);
 	
 	printf("\nSUCESSFULLY SUBMITTED\n");
 	fprintf(fp1, "%sOutput displayed : SUCCESSFULLY SUBMITTED\n",date());
-
+	
+	
 	fclose(fp);
 
 	fclose(fp1);
